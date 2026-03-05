@@ -1,0 +1,40 @@
+body{
+  display: flex;
+  justify-content: center;
+  background-color: #f4f4f4;
+}
+
+.country-card{
+  width: 350px;
+  background: white;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
+}
+
+.country-name{
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.country-info{
+  display: flex;
+  gap: 15px;
+}
+
+.country-flag{
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.country-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.country-card:hover{
+  transform:scale(1.02);
+}

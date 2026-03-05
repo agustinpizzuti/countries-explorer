@@ -1,10 +1,10 @@
-import './App.css'
-import ContentCountry from './Components/ContentCountry'
+import CountryList from './Components/CountryList'
+import './CListStyle.css';
 
 function App() {
   return (
     <>
-      <ContentCountry/>
+      <CountryList/>
     </>
   )
 }

@@ -1,0 +1,51 @@
+import React, { useEffect, useState } from 'react'
+import CountryCard from './CountryCard';
+import "../Style.css";
+
+const CountryList = () => {
+
+    const [countries, setCountries] =useState([]);
+    const [index, setIndex] =useState(0);
+
+    let prevIndex = 0;
+    let nextIndex = 0;
+
+    if (countries.length > 0) {
+        prevIndex = (index - 1 + countries.length) % countries.length;
+        nextIndex = (index + 1) % countries.length;
+    }
+
+    const nextCountry = () =>{
+        setIndex((prev) => (prev + 1) % countries.length);
+    }
+
+    const prevCountry = () =>{
+        setIndex((prev) => (prev - 1 + countries.length) % countries.length);
+    }
+
+    useEffect(() =>{
+        fetch("https://restcountries.com/v3.1/all?fields=name,flags,capital,continents,languages,cca3")
+        .then(response => response.json())
+        .then(data => {setCountries(data)})
+    }, []);
+
+  return (
+   <div className="center">
+        {countries.length > 0 && (
+            <>
+                <CountryCard country={countries[prevIndex]} />
+
+                <CountryCard
+                    country={countries[index]}
+                    nextCountry={nextCountry}
+                    prevCountry={prevCountry}
+                />
+
+            <CountryCard country={countries[nextIndex]} />
+            </>
+        )}
+    </div>
+  )
+}
+
+export default CountryList
