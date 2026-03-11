@@ -1,39 +1,22 @@
-const CountryCard = ({ country, nextCountry, prevCountry }) => {
+import { useNavigate } from "react-router-dom"
+import "../CListStyle.css"
 
-  const handleClick = (e) => {
-    const cardWidth = e.currentTarget.offsetWidth;
-    const clickX = e.nativeEvent.offsetX;
+const CountryCard = ({country}) => {
+    const navigate = useNavigate();
 
-    if(clickX < cardWidth / 2){
-      prevCountry();
-    } else {
-      nextCountry();
+    const handelClick = () => {
+        navigate(`/country/${country.name.common}`)
     }
-  };
 
-  return (
-    <div className="country-card" onClick={handleClick}>
-        <h3 className="country-name">{country.name.common}</h3>
-
-        <div className="country-info">
+    return (
+        <div className="country-card" onClick={handelClick}>
             <img
-              className="country-flag"
-              src={country.flags.svg}
-              alt={country.name.common}
-            />
-
-            <div className="country-data">
-                <p>Capital: {country.capital?.[0]}</p>
-                <p>Continent: {country.continents?.[0]}</p>
-                <p>
-                  Languages: {Object.values(country.languages ?? {})
-                  .slice(0,2)
-                  .join(", ")}
-                </p>
-            </div>
+                className="country-flag"
+                src={country.flags.svg}
+                alt={country.name.common}
+            />   
         </div>
-    </div>
-  )
+    )
 }
 
-export default CountryCard
+export default CountryCard;

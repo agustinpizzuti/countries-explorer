@@ -1,59 +1,127 @@
-import React, { useEffect, useState } from 'react'
-import CountryCard from './CountryCard';
+import React, { useEffect, useState } from "react";
+import CountryCard from "./CountryCard";
+import { getCountries } from "../Services/countriesApi";
 import "../Style.css";
-import { getCountries } from '../Services/countriesApi';
 
 const CountryList = () => {
+  const [countries, setCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [continent, setContinent] = useState("All");
+  const [search, setSearch] = useState("");
+  
+  const [page, setPage] = useState(0);
 
-    const [countries, setCountries] =useState([]);
-    const [index, setIndex] =useState(0);
+  const countriesPerPage = 30;
 
-    let prevIndex = 0;
-    let nextIndex = 0;
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const data = await getCountries();
+      setCountries(data);
+      setFilteredCountries(data);
+    };
 
-    if (countries.length > 0) {
-        prevIndex = (index - 1 + countries.length) % countries.length;
-        nextIndex = (index + 1) % countries.length;
-    }
+    fetchCountries();
+  }, []);
 
-    const nextCountry = () =>{
-        setIndex((prev) => (prev + 1) % countries.length);
-    }
+  const start = page * countriesPerPage;
+  const end = start + countriesPerPage;
 
-    const prevCountry = () =>{
-        setIndex((prev) => (prev - 1 + countries.length) % countries.length);
-    }
+  const currentCountries = filteredCountries.slice(start, start + countriesPerPage);
 
-    useEffect(() => {
-        const fetchCountries = async () => {
-            try{
-                const data = await getCountries();
-                setCountries(data);
-            }catch(error){
-                console.log(error);
-            }
-        }   
+  const nextPage = () => {
+    if (end < filteredCountries.length) setPage(page + 1);
+  };
 
-        fetchCountries();
-    }, []);
-    
+  const prevPage = () => {
+    if (page > 0) setPage(page - 1);
+  };
+
+  const sortAlphabetically = () =>{
+    const sorted = [...filteredCountries].sort((a,b) => 
+      a.name.common.localeCompare(b.name.common)
+    )
+
+    setFilteredCountries(sorted);
+  }
+
   return (
-   <div className="center">
-        {countries.length > 0 && (
-            <>
-                <CountryCard country={countries[prevIndex]} />
+    <div className="countries-container">
 
-                <CountryCard
-                    country={countries[index]}
-                    nextCountry={nextCountry}
-                    prevCountry={prevCountry}
-                />
+    <button onClick={sortAlphabetically} className="sort-btn">
+        Sort A-Z
+      </button>
 
-                <CountryCard country={countries[nextIndex]} />
-            </>
-        )}
+      <select
+          value={continent}
+          onChange={(e) => {
+            const selected = e.target.value;
+            setContinent(selected);
+
+            let filtered = countries;
+
+            if (selected !== "All") {
+              filtered = countries.filter((country) =>
+                country.continents?.includes(selected)
+              )
+            }
+
+            setFilteredCountries(filtered);
+          }}
+            
+          className="filter-select"
+      >
+          <option value="All">All Continents</option>
+          <option value="Africa">Africa</option>
+          <option value="South America">Americas</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
+      </select>
+      
+      <input
+          type="text"
+          placeholder="Search country..."
+          value={search}
+          onChange={(e) => {
+            const value = e.target.value;
+            setSearch(value);
+
+            if (value.trim() !== "") {
+              const result = countries.filter((c) =>
+                c.name.common.toLowerCase().includes(value.toLowerCase())
+              );
+
+              setFilteredCountries(result);
+              setPage(0);
+            } else {
+              // vuelve al filtro por continente
+              if (continent === "All") {
+                setFilteredCountries(countries);
+              } else {
+                const result = countries.filter((c) =>
+                  c.continents?.includes(continent)
+                );
+                setFilteredCountries(result);
+              }
+
+              setPage(0);
+            }
+          }}
+          className="search-input"
+/>
+
+      <div className="countries-grid">
+        {currentCountries.map((country) => (
+          <CountryCard key={country.cca3} country={country} />
+        ))}
+      </div>
+
+      <div className="navigation">
+        <button onClick={prevPage}>⬅</button>
+        <button onClick={nextPage}>➡</button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default CountryList
+export default CountryList;
