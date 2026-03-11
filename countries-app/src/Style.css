@@ -2,6 +2,7 @@ body{
   display: flex;
   justify-content: center;
   background-color: #f4f4f4;
+  color: black;
 }
 
 .country-card{
@@ -29,6 +30,7 @@ body{
   object-fit: cover;
   border-radius: 4px;
 }
+
 .country-data{
   display: flex;
   flex-direction: column;
@@ -38,3 +40,5 @@ body{
 .country-card:hover{
   transform:scale(1.02);
 }
+
+

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CountryCard from './CountryCard';
 import "../Style.css";
+import { getCountries } from '../Services/countriesApi';
 
 const CountryList = () => {
 
@@ -23,12 +24,19 @@ const CountryList = () => {
         setIndex((prev) => (prev - 1 + countries.length) % countries.length);
     }
 
-    useEffect(() =>{
-        fetch("https://restcountries.com/v3.1/all?fields=name,flags,capital,continents,languages,cca3")
-        .then(response => response.json())
-        .then(data => {setCountries(data)})
-    }, []);
+    useEffect(() => {
+        const fetchCountries = async () => {
+            try{
+                const data = await getCountries();
+                setCountries(data);
+            }catch(error){
+                console.log(error);
+            }
+        }   
 
+        fetchCountries();
+    }, []);
+    
   return (
    <div className="center">
         {countries.length > 0 && (
@@ -41,7 +49,7 @@ const CountryList = () => {
                     prevCountry={prevCountry}
                 />
 
-            <CountryCard country={countries[nextIndex]} />
+                <CountryCard country={countries[nextIndex]} />
             </>
         )}
     </div>
