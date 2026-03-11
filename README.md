@@ -16,7 +16,7 @@ La aplicación permite visualizar países, buscarlos por nombre, filtrarlos por 
 
 ---
 
-## 🛠 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - **React**
 - **JavaScript**
@@ -42,4 +42,3 @@ Esto permite mantener el código más limpio, reutilizable y fácil de mantener.
 https://restcountries.com/
 
 ---
-
