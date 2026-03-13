@@ -1,6 +1,6 @@
 export const paginate = (items, currentPage, itemsPerPage) => {
   const totalPages = Math.ceil(items.length / itemsPerPage);
-  const page = Math.min(Math.max(currentPage, 1), totalPages); // asegura que esté en rango
+  const page = Math.min(Math.max(currentPage, 1), totalPages); 
   const start = (page - 1) * itemsPerPage;
   const end = start + itemsPerPage;
 

@@ -1,0 +1,16 @@
+.navigation {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navigation button {
+  font-size: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  border: none;
+  background: #222;
+  color: white;
+  border-radius: 5px;
+}

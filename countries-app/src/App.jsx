@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CountryList from './Components/CountryList'
-import CountryPage from './Components/CountryPage'
+import CountryList from './Components/CountryList/CountryList.jsx'
+import CountryPage from './Components/CountryPage/CountryPage.jsx'
 
-import './CListStyle.css';
+import './Style.css';
 
 function App() {
   return (

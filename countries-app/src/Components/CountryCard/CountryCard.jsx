@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import "../CListStyle.css"
+import "../CountryCard/CountryCard.css";
 
 const CountryCard = ({country}) => {
     const navigate = useNavigate();

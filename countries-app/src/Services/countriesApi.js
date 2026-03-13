@@ -18,7 +18,7 @@ const API_BASE = "https://restcountries.com/v3.1";
 export const getCountryByname = async (name) => {
     try{
 
-      const response = await fetch(`${API_BASE}/name/${name}?fields=name,flags,capital,region,population,area,continents,languages,currencies,maps`);
+      const response = await fetch(`${API_BASE}/name/${name}?fields=name,flags,capital,region,population,area,continents,languages,currencies,maps,cca3`);
 
       const data = await response.json();
       return data[0];
