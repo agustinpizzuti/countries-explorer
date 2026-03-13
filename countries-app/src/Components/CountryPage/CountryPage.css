@@ -22,6 +22,11 @@
   color: black;
 }
 
+.country-detail-card img{
+  border: solid 4px black;
+  border-radius: 5%;
+}
+
 .country-detail-card h1 {
   margin: 10px 0;
   font-size: 32px;

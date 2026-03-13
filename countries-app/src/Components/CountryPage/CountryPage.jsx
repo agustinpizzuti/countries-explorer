@@ -34,8 +34,6 @@ const CountryPage = () => {
         fetchCountry();
     }, [name]);
    
-    
-
     if (!country) {
         return <p>Loading...</p>;
     }
