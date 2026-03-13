@@ -21,6 +21,9 @@ import {getFavorites} from "../../utils/favorites";
 //STYLE
 import "../CountryList/CountryList.css";
 
+//ANIMACION
+import {motion} from "framer-motion";
+
 const CountryList = () => {
   const [countries, setCountries] = useState([]);
 
@@ -115,7 +118,19 @@ const CountryList = () => {
 
       <div className="countries-grid">
         {currentCountries.map((country) => (
-          <CountryCard key={country.cca3} country={country} />
+          <motion.div
+            key={country.name.common}
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y:0}}
+            transition={{duration: 0.5}}
+          >
+          
+          <motion.div
+            whileHover={{ scale: 1.05, boxShadow: "0px 5px 15px rgba(0,0,0,0.3)" }}
+          >
+            <CountryCard key={country.cca3} country={country} />
+          </motion.div>
+        </motion.div>
         ))}
       </div>
 
