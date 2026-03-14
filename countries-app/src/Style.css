@@ -41,17 +41,14 @@ body, .dark, .light {
   transition: all 0.3s ease;
 }
 
-/* --- Ajuste para Móvil --- */
 @media (max-width: 650px) {
   .theme-btn {
-    /* Lo movemos abajo para que no tape el buscador de arriba */
     top: auto; 
     bottom: 20px; 
     right: 20px;
     
-    /* Lo hacemos más compacto */
     padding: 10px;
     font-size: 14px;
-    border-radius: 50px; /* Estilo redondo tipo "FAB" */
+    border-radius: 50px; 
   }
 }
