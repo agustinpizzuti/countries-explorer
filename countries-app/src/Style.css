@@ -30,4 +30,28 @@ body, .dark, .light {
   top: 20px;
   right: 20px;
   z-index: 1000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid #ccc;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+/* --- Ajuste para Móvil --- */
+@media (max-width: 650px) {
+  .theme-btn {
+    /* Lo movemos abajo para que no tape el buscador de arriba */
+    top: auto; 
+    bottom: 20px; 
+    right: 20px;
+    
+    /* Lo hacemos más compacto */
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 50px; /* Estilo redondo tipo "FAB" */
+  }
 }

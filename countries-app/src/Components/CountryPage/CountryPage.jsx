@@ -47,7 +47,6 @@ const CountryPage = () => {
             setFavorites(true);
         }
     }
-    
 
   return (
     <div className='country-page'>
